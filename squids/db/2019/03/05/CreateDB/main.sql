@@ -1,0 +1,34 @@
+CREATE DATABASE `cloudyplanet` DEFAULT CHARACTER SET utf8;
+
+USE `cloudyplanet`;
+
+CREATE TABLE `Song` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `Created` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `Modified` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `Artist` varchar(256) NOT NULL,
+  `Name` varchar(256) NOT NULL,
+  PRIMARY KEY (`ID`),
+  KEY `k_Song_Artist` (`Artist`),
+  KEY `k_Song_Name` (`Name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `Tag` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `Created` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `Modified` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `Name` varchar(256) NOT NULL,
+  PRIMARY KEY (`ID`),
+  UNIQUE `u_Tag_Name` (`Name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `SongTag` (
+  `SongID` int(11) NOT NULL,
+  `TagID` int(11) NOT NULL,
+  PRIMARY KEY (`SongID`, `TagID`),
+  KEY `fk_SongTag_SongID_Song_ID` (`SongID`),
+  KEY `fk_SongTag_TagID_Tag_ID` (`TagID`),
+  CONSTRAINT `fk_SongTag_SongID_Song_ID` FOREIGN KEY (`SongID`) REFERENCES `Song` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_SongTag_TagID_Tag_ID` FOREIGN KEY (`TagID`) REFERENCES `Tag` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
