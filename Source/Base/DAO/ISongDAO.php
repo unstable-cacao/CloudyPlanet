@@ -26,4 +26,9 @@ interface ISongDAO
 	public function updateTags(Song $song): bool;
 	public function loadTags(Song $song): void;
 	public function delete(int $id): bool;
+	
+	/**
+	 * @return Song[]
+	 */
+	public function loadAll(): array;
 }

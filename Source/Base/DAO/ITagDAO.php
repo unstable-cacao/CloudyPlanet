@@ -10,6 +10,13 @@ interface ITagDAO
 {
 	public function load(int $id): ?Tag;
 	public function loadByName(string $name): ?Tag;
+	
+	/**
+	 * @param int[] $ids
+	 * @return Tag[]
+	 */
+	public function loadAllByIds(array $ids): array;
+	
 	public function save(Tag $tag): bool;
 	public function update(Tag $tag): bool;
 	public function delete(int $id): bool;
@@ -35,4 +42,9 @@ interface ITagDAO
 	public function insertTagRelationsById(int $songId, array $tagIds): bool;
 	
 	public function updateForSong(Song $song): bool;
+	
+	/**
+	 * @return Tag[]
+	 */
+	public function loadAll(): array;
 }

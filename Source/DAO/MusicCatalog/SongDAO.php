@@ -8,6 +8,7 @@ use CloudyPlanet\MySQLConnector;
 use CloudyPlanet\Objects\MusicCatalog\Song;
 use CloudyPlanet\SkeletonInit;
 use Squid\MySql\Impl\Connectors\Object\Generic\GenericIdConnector;
+use Squid\OrderBy;
 
 
 class SongDAO implements ISongDAO
@@ -88,5 +89,17 @@ class SongDAO implements ISongDAO
 	public function delete(int $id): bool 
 	{
 		return $this->connector->deleteById($id);
+	}
+	
+	public function loadAll(): array 
+	{
+		$songs = $this->connector->selectObjects(['Name'], OrderBy::ASC);
+		
+		foreach ($songs as $song) 
+		{
+			$this->loadTags($song);
+		}
+		
+		return $songs;
 	}
 }

@@ -7,6 +7,7 @@ use CloudyPlanet\MySQLConnector;
 use CloudyPlanet\Objects\MusicCatalog\Song;
 use CloudyPlanet\Objects\MusicCatalog\Tag;
 use Squid\MySql\Impl\Connectors\Object\Generic\GenericIdConnector;
+use Squid\OrderBy;
 
 
 class TagDAO implements ITagDAO
@@ -37,6 +38,11 @@ class TagDAO implements ITagDAO
 	public function loadByName(string $name): ?Tag
 	{
 		return $this->connector->oneByField('Name', $name);
+	}
+	
+	public function loadAllByIds(array $ids): array 
+	{
+		return $this->connector->allByField('ID', $ids);
 	}
 	
 	public function save(Tag $tag): bool
@@ -126,5 +132,10 @@ class TagDAO implements ITagDAO
 			$result = $this->insertTagRelationsById($song->ID, $idsToInsert) && $result;
 		
 		return $result;
+	}
+	
+	public function loadAll(): array
+	{
+		return $this->connector->selectObjects(['Name'], OrderBy::ASC);
 	}
 }
