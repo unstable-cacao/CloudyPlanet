@@ -1,7 +1,9 @@
 namespace('CloudyPlanet.Config', function (root)
 {
     var RootAction  	    = root.CloudyPlanet.Actions.RootAction;
-    var MusicCatalogAction	= root.CloudyPlanet.Actions.MusicCatalogAction;
+    var IndexAction  	    = root.CloudyPlanet.Actions.IndexAction;
+    var SongsAction	        = root.CloudyPlanet.Actions.MusicCatalog.SongsAction;
+    var TagsAction	        = root.CloudyPlanet.Actions.MusicCatalog.TagsAction;
     var NotFoundAction	    = root.CloudyPlanet.Actions.NotFoundAction;
 
 
@@ -10,23 +12,46 @@ namespace('CloudyPlanet.Config', function (root)
         {
             action: RootAction
         },
+
+        $:
+        {
+            action: IndexAction
+        },
         
         404:
         {
             $:
-                {
-                    path: '404',
-                    action: NotFoundAction
-                }
+            {
+                path: '404',
+                action: NotFoundAction
+            }
         },
         
         MusicCatalog:
         {
             $:
+            {
+                path: 'music-catalog',
+                action: NotFoundAction
+            },
+            
+            Songs:
+            {
+                $:
                 {
-                    path: 'music-catalog',
-                    action: MusicCatalogAction
-                }
+                    path: 'songs',
+                    action: SongsAction
+                },
+            },
+            
+            Tags:
+            {
+                $:
+                {
+                    path: 'tags',
+                    action: TagsAction
+                },
+            }
         }
     };
 });

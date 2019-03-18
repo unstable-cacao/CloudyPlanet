@@ -51,12 +51,15 @@ const dependencies = (() =>
 
 gulp.task('templates', () =>
 {
-    gulp.src('view/*.hbs')
+    gulp.src('view/**/*.hbs')
         .pipe(handlebars())
         .pipe(wrap('Handlebars.template(<%= contents %>)'))
         .pipe(declare({
             namespace: 'Views',
             noRedeclare: true,
+            processName: function (filePath) {
+                return declare.processNameByPath(filePath.replace('view', ''));
+            }
         }))
         .pipe(concat('templates.js'))
         .pipe(gulp.dest('../Public/resources'));
@@ -69,8 +72,15 @@ gulp.task('build-libs', () =>
         .pipe(gulp.dest('../Public/resources'));
 });
 
+gulp.task('build-css', () =>
+{
+    gulp.src('css/*.css')
+        .pipe(concat('app.css'))
+        .pipe(gulp.dest('../Public/resources'));
+});
 
-gulp.task('build', ['templates', 'build-libs'], () =>
+
+gulp.task('build', ['templates', 'build-libs', 'build-css'], () =>
 {
     gulp.src(dependencies)
         .pipe(concat('main.js'))

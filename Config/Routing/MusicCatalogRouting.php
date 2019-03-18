@@ -30,7 +30,7 @@ return [
 			[
 				// Music catalog actions
 				[
-					"route"         => "music-catalog/songs",
+					"route"         => "api/music-catalog/songs",
 					"method"        => "GET",
 					"controller"    => \CloudyPlanet\Web\Controllers\MusicCatalog\SongController::class,
 					"action"        => 'index',
@@ -58,7 +58,7 @@ return [
 					]
 				],
 				[
-					"route"         => "music-catalog/tags",
+					"route"         => "api/music-catalog/tags",
 					"method"        => "GET",
 					"controller"    => \CloudyPlanet\Web\Controllers\MusicCatalog\TagController::class,
 					"action"        => 'index',

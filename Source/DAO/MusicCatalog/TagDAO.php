@@ -64,6 +64,7 @@ class TagDAO implements ITagDAO
 	{
 		$tags = $this->connector->getConnector()
 			->select()
+			->from(self::TABLE)
 			->column('Tag.*')
 			->join('SongTag', 'sg', 'sg.TagID = Tag.ID')
 			->byField('sg.SongID', $song->ID)

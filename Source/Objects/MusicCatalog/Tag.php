@@ -8,6 +8,8 @@ use Objection\LiteSetup;
 
 /**
  * @property int 	$ID
+ * @property string $Created
+ * @property string $Modified
  * @property string $Name
  */
 class Tag extends LiteObject
@@ -18,8 +20,10 @@ class Tag extends LiteObject
 	protected function _setup()
 	{
 		return [
-			'ID'	=> LiteSetup::createInt(null),
-			'Name'	=> LiteSetup::createString(null)
+			'ID'		=> LiteSetup::createInt(null),
+			'Created'	=> LiteSetup::createString(null),
+			'Modified'	=> LiteSetup::createString(null),
+			'Name'		=> LiteSetup::createString(null)
 		];
 	}
 }

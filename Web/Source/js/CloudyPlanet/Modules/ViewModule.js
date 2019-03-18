@@ -10,14 +10,26 @@ namespace('CloudyPlanet.Modules', function (root)
     ViewModule.moduleName = 'View';
 
 
-    ViewModule.prototype.render = function(name)
+    ViewModule.prototype.render = function(folder, name, data)
     {
-        if (!is(Views[name]))
+        if (is(name))
         {
-            console.error(`Could not find template ${name}!`);
-        }
+            if (!is(Views[folder][name]))
+            {
+                console.error(`Could not find template ${folder}/${name}!`);
+            }
 
-        $('main').empty().append(Views[name]());
+            $('main').empty().append(Views[folder][name]({data: data}));
+        }
+        else
+        {
+            if (!is(Views[folder]))
+            {
+                console.error(`Could not find template ${folder}!`);
+            }
+
+            $('main').empty().append(Views[folder]({data: data}));
+        }
     };
 
 
