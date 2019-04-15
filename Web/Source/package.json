@@ -4,22 +4,23 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack --config webpack.config.dev.js"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Marina Puchkov",
   "license": "MIT",
   "dependencies": {
-    "oktopost-plankton": "^2.1.1",
-    "vue": "^2.6.10",
-    "vue-router": "^3.0.2"
+    "gulp": "^3.9.1",
+    "oktopost-duct": "^1.1.5",
+    "oktopost-namespace": "git+ssh://git@github.com/Oktopost/namespace.git#v3",
+    "oktopost-oyster": "^1.2.5",
+    "oktopost-plankton": "^2.1.1"
   },
   "devDependencies": {
-    "css-loader": "^2.1.1",
-    "vue-loader": "^15.7.0",
-    "vue-style-loader": "^4.1.2",
-    "vue-template-compiler": "^2.6.10",
-    "webpack": "^4.29.6",
-    "webpack-cli": "^3.3.0"
+    "gulp-concat": "^2.6.1",
+    "gulp-declare": "^0.3.0",
+    "gulp-handlebars": "^5.0.2",
+    "gulp-rename": "^1.4.0",
+    "gulp-uglify": "^3.0.1",
+    "gulp-wrap": "^0.14.0"
   }
 }
