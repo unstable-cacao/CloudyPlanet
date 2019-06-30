@@ -9,6 +9,20 @@ namespace('CloudyPlanet.Modules', function (root)
 
     ViewModule.moduleName = 'View';
 
+    
+    
+    
+    ViewModule.prototype.getHtml = function(folder, name, data)
+    {
+        var obj = Views[folder]({data: data});
+        
+        obj.render = function (selector)
+        {
+            $(selector).empty().append(obj);
+        };
+        
+        return obj;
+    };
 
     ViewModule.prototype.render = function(folder, name, data)
     {

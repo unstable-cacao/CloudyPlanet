@@ -1,6 +1,7 @@
 namespace('CloudyPlanet.Actions.MusicCatalog', function (root)
 {
     var Action 	= root.Oyster.Action;
+    var MusicCatalog = root.CloudyPlanet.Components.MusicCatalog;
 
 
     function SongsAction() { Action.call(this); }
@@ -24,11 +25,13 @@ namespace('CloudyPlanet.Actions.MusicCatalog', function (root)
 
     SongsAction.prototype.activate = function ()
     {
+        this._catalog = this.component(MusicCatalog);
+        
         this.modules('View').render('music-catalog', 'loading');
         $.get(
             {
                 url: '/api/music-catalog/songs',
-                success: this._renderContent
+                success: (data) => { this._catalog.setData(data); }
             }
         );
     };
